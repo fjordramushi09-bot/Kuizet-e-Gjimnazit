@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuizet — Gjimnazi Natyror</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f2ea;--paper:#fffdf8;--ink:#1c2740;--ink2:#46506a;--muted:#737b8e;--line:#e5dece;--line2:#d4cab3;--acc:#c23b22;--acc2:#a83119;--accsoft:#fbe9e4;--ok:#2d7a4b;--oksoft:#e2f1e7;--warn:#a96b10;--warnsoft:#fbf0d9;--bad:#b3261e;--badsoft:#fbe4e2;--info:#2b59c3;--infosoft:#e6edfb;--r:14px;--sh:0 1px 0 rgba(28,39,64,.04),0 8px 24px -14px rgba(28,39,64,.28)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+body.noscroll{overflow:hidden}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:700;letter-spacing:-.012em;line-height:1.15;margin:0}
+h1{font-size:clamp(27px,4.6vw,40px)}h2{font-size:21px}h3{font-size:18px}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+.wrap.narrow{max-width:680px}
+.muted{color:var(--muted)}.small{font-size:13.5px}.mt{margin-top:10px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}
+
+/* header */
+header.top{position:sticky;top:0;z-index:20;background:rgba(245,242,234,.93);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.brand[disabled]{cursor:default}
+.logo{width:36px;height:36px;border-radius:10px;background:var(--acc);color:#fff;display:grid;place-items:center;font:700 20px/1 Fraunces,serif;box-shadow:inset 0 -3px 0 rgba(0,0,0,.15)}
+.brand b{font:700 18px/1.1 Fraunces,serif;display:block}
+.brand small{color:var(--muted);font-size:12px;display:block}
+.top .sp{flex:1}
+.who{font-size:13.5px;color:var(--ink2);margin-right:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
+body.taking header.top{display:none}
+main{padding:22px 0 100px}
+
+/* buttons */
+.btn{appearance:none;border:1px solid var(--line2);background:var(--paper);color:var(--ink);font:600 15px/1.1 Inter,sans-serif;padding:11px 16px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;min-height:44px;transition:background .15s,border-color .15s,transform .05s}
+.btn:hover{border-color:var(--ink2)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible,.opt:focus-visible,.subj:focus-visible{outline:3px solid #9db4ef;outline-offset:2px}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}.btn.primary:hover{background:#2b3a5c}
+.btn.acc{background:var(--acc);border-color:var(--acc);color:#fff}.btn.acc:hover{background:var(--acc2)}
+.btn.ghost{background:transparent;border-color:transparent}.btn.ghost:hover{background:rgba(28,39,64,.06)}
+.btn.danger{color:var(--bad);border-color:#e9bdb8}.btn.danger:hover{background:var(--badsoft)}
+.btn.danger-solid{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn.sm{padding:7px 11px;font-size:13.5px;min-height:36px;border-radius:8px}
+.btn.lg{padding:15px 22px;font-size:16.5px;min-height:54px;border-radius:12px}
+.btn.block{width:100%}
+.btn.on{background:var(--oksoft);border-color:#9fcbb0;color:var(--ok)}
+.btn[disabled]{opacity:.5;cursor:default;transform:none}
+.btn.loading{position:relative;color:transparent!important}
+.btn.loading::after{content:"";position:absolute;width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(255,255,255,.5);border-top-color:#fff;animation:spin .7s linear infinite}
+.btn:not(.primary):not(.acc).loading::after{border-color:rgba(28,39,64,.25);border-top-color:var(--ink)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn.link{border:0;background:none;padding:6px 0;min-height:0;color:var(--ink2);font-weight:600;margin-bottom:10px}
+.btn.link:hover{color:var(--ink)}
+.icon{border:0;background:none;width:34px;height:34px;border-radius:8px;cursor:pointer;color:var(--ink2);font-size:15px;display:inline-grid;place-items:center}
+.icon:hover{background:rgba(28,39,64,.07);color:var(--ink)}
+.icon.danger:hover{background:var(--badsoft);color:var(--bad)}
+.icon[disabled]{opacity:.3;cursor:default;background:none}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn-row.end{justify-content:flex-end}
+
+/* cards & layout */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+.pad{padding:22px}
+.center{text-align:center}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:30px 0 14px}
+.section-head.top-gap{margin-top:8px}
+.grid{display:grid;gap:12px}
+.list{display:grid;gap:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--c,#777) 12%,#fff);color:color-mix(in srgb,var(--c,#777) 75%,#000);border:1px solid color-mix(in srgb,var(--c,#777) 22%,#fff)}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;letter-spacing:.02em;white-space:nowrap}
+.badge.ok{background:var(--oksoft);color:var(--ok)}.badge.warn{background:var(--warnsoft);color:var(--warn)}.badge.bad{background:var(--badsoft);color:var(--bad)}.badge.info{background:var(--infosoft);color:var(--info)}.badge.gray{background:#ece8de;color:#5f6576}
+.note{background:var(--warnsoft);color:#6b4a0e;border:1px solid #efd9a8;padding:10px 14px;border-radius:10px;font-size:14px;margin:12px 0}
+.notice{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--infosoft);border:1px solid #c5d4f4;border-radius:12px;padding:12px 16px;margin-top:18px}
+.notice b{display:block}.notice span{font-size:14px;color:var(--ink2)}
+.empty-state{text-align:center;padding:38px 20px;border:1.5px dashed var(--line2);border-radius:var(--r);color:var(--ink2)}
+.empty-state p+p{margin-top:6px}
+.skel{background:linear-gradient(90deg,#ece6d8 0,#f4efe4 50%,#ece6d8 100%);background-size:200% 100%;animation:sk 1.2s infinite;border-radius:12px}
+@keyframes sk{to{background-position:-200% 0}}
+
+/* hero */
+.hero{padding:26px 0 6px;max-width:720px}
+.lead{font-size:17.5px;color:var(--ink2);margin-top:12px;max-width:600px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.seg{display:inline-flex;background:#ebe5d7;border-radius:10px;padding:3px;gap:2px}
+.seg button{border:0;background:none;padding:7px 13px;border-radius:8px;font-weight:600;font-size:14px;color:var(--ink2);cursor:pointer}
+.seg button.on{background:var(--paper);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.seg.big{display:flex;margin-top:12px}.seg.big button{flex:1;padding:12px;font-size:15px}
+.seg.big button.on{background:var(--oksoft);color:var(--ok);box-shadow:inset 0 0 0 1.5px #9fcbb0}
+
+.subjects{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.subj{display:grid;grid-template-columns:44px 1fr;grid-template-rows:auto auto;column-gap:12px;align-items:center;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px;cursor:pointer;position:relative;overflow:hidden;box-shadow:var(--sh);transition:transform .12s,border-color .12s}
+.subj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c)}
+.subj:hover{transform:translateY(-2px);border-color:var(--line2)}
+.subj .ic{grid-row:span 2;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:color-mix(in srgb,var(--c) 12%,#fff)}
+.subj .nm{font-weight:700;font-size:15px;line-height:1.25}
+.subj .ct{font-size:13px;color:var(--c);font-weight:600}
+.subj.empty{box-shadow:none;background:#faf7f0}.subj.empty .ct{color:var(--muted);font-weight:500}.subj.empty .ic{filter:grayscale(.5);opacity:.75}
+.how{margin-top:40px}
+.steps{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));counter-reset:s}
+.steps li{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 16px 58px;position:relative;counter-increment:s}
+.steps li::before{content:counter(s);position:absolute;left:16px;top:16px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font:700 15px/30px Fraunces,serif;text-align:center}
+.steps b{display:block}.steps span{font-size:14px;color:var(--ink2)}
+
+.subj-head{display:flex;align-items:center;gap:14px;margin:4px 0 6px}
+.ic.big{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:30px;background:color-mix(in srgb,var(--c) 14%,#fff)}
+.qcard-pub{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:var(--r);padding:16px 18px;box-shadow:var(--sh)}
+.meta{color:var(--muted);font-size:14px;margin-top:4px}
+
+/* forms */
+.field{display:block;margin-top:14px}
+.field>span{display:block;font-size:13.5px;font-weight:600;color:var(--ink2);margin-bottom:6px}
+.field em{font-style:normal;font-weight:400;color:var(--muted)}
+input:not([type=checkbox]):not([type=radio]),select,textarea{width:100%;background:#fff;border:1px solid var(--line2);border-radius:10px;padding:11px 12px;font-size:16px;outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--info);box-shadow:0 0 0 3px #dbe5fb}
+textarea{resize:vertical;min-height:48px;line-height:1.45}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1.4fr .8fr 1fr;gap:12px}
+.code-input{text-align:center;font:700 34px/1.2 Fraunces,serif!important;letter-spacing:.35em;padding:14px!important;margin:18px 0 14px}
+label.check{display:flex;gap:10px;align-items:flex-start;margin-top:14px;cursor:pointer;font-size:15px}
+label.check input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--ink)}
+.hint{display:block;font-size:13px;color:var(--muted);margin-top:8px}
+
+/* intro */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 12px}
+.facts div{background:var(--bg);border-radius:10px;padding:10px 6px;text-align:center}
+.facts b{display:block;font:700 22px/1.1 Fraunces,serif}.facts span{font-size:12.5px;color:var(--muted)}
+.instr{background:var(--warnsoft);border:1px solid #efd9a8;border-radius:12px;padding:14px 16px;margin-top:16px}
+.instr b{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#7a530e}
+.instr p{white-space:pre-wrap;margin-top:4px}
+.rules{margin:16px 0 0;padding-left:20px;color:var(--ink2);font-size:14.5px}
+.rules li+li{margin-top:4px}
+.card+.card{margin-top:14px}
+.two-col>.card{margin-top:0}
+form.card h3{margin-bottom:2px}
+form.card .btn.block{margin-top:18px}
+
+/* take */
+.take-bar{position:sticky;top:0;z-index:15;background:var(--ink);color:#fff}
+.take-bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:58px;padding-top:6px;padding-bottom:6px}
+.tb-l{min-width:0}
+.tb-l b{display:block;font:600 16px/1.2 Fraunces,serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-l span{font-size:12.5px;opacity:.75}
+.timer{font:700 20px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(255,255,255,.12);padding:9px 12px;border-radius:10px;font-variant-numeric:tabular-nums;flex-shrink:0}
+.timer.mid{background:#a96b10}.timer.low{background:var(--acc);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.75}}
+.prog{height:4px;background:rgba(255,255,255,.15)}.prog i{display:block;height:100%;background:#7fd3a0;transition:width .3s}
+.take{padding-top:20px}
+.qmeta{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.03em;text-transform:uppercase}
+.qtext{font-size:clamp(20px,3.6vw,25px);margin:10px 0 18px;white-space:pre-wrap;line-height:1.3}
+.opts{display:grid;gap:10px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;width:100%;background:#fff;border:1.5px solid var(--line2);border-radius:12px;padding:13px 14px;cursor:pointer;font-size:16px;min-height:56px;transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--ink2)}
+.opt .letter{flex-shrink:0;width:32px;height:32px;border-radius:9px;background:var(--bg);display:grid;place-items:center;font-weight:700;color:var(--ink2)}
+.opt.sel{border-color:var(--ink);background:#eef1f8;box-shadow:inset 0 0 0 1px var(--ink)}
+.opt.sel .letter{background:var(--ink);color:#fff}
+.qnav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.qnav .btn{flex:1;max-width:220px}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px;justify-content:center}
+.dot{width:34px;height:34px;border-radius:9px;border:1px solid var(--line2);background:var(--paper);font-size:13px;font-weight:600;cursor:pointer;color:var(--ink2)}
+.dot.ok{background:#dfe5f2;border-color:#b9c4dd;color:var(--ink)}
+.dot.cur{border:2px solid var(--ink);color:var(--ink)}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-top:16px}
+.rv{border:1px solid var(--line2);border-radius:10px;padding:10px;text-align:left;background:#fff;cursor:pointer}
+.rv b{display:block;font:700 18px Fraunces,serif}.rv span{font-size:12.5px}
+.rv.done{background:var(--oksoft);border-color:#a9d2b8}.rv.done span{color:var(--ok)}
+.rv.todo{background:var(--warnsoft);border-color:#ecd29c}.rv.todo span{color:var(--warn)}
+
+/* done */
+.done .check{width:68px;height:68px;border-radius:50%;background:var(--oksoft);color:var(--ok);display:grid;place-items:center;font-size:34px;font-weight:700;margin:4px auto 14px}
+.done .lead{margin:16px auto 22px}
+.score{display:flex;align-items:center;justify-content:center;gap:26px;margin:22px 0 24px;flex-wrap:wrap}
+.ring{--p:0;width:128px;height:128px;border-radius:50%;background:conic-gradient(var(--ok) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center}
+.ring b{width:100px;height:100px;border-radius:50%;background:var(--paper);display:grid;place-items:center;font:700 26px Fraunces,serif}
+.score-facts{display:grid;gap:10px;text-align:left}
+.score-facts b{display:block;font:700 24px/1 Fraunces,serif}.score-facts span{font-size:13px;color:var(--muted)}
+
+/* teacher dash */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{border:1px solid var(--line2);background:var(--paper);border-radius:999px;padding:7px 14px;font-weight:600;font-size:14px;cursor:pointer;color:var(--ink2)}
+.tab span{color:var(--muted);font-weight:500;margin-left:3px}
+.tab.on{background:var(--ink);border-color:var(--ink);color:#fff}.tab.on span{color:#c9cfdd}
+.tq{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--sh);border-top:4px solid var(--c)}
+.tq-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.codebox{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--bg);border-radius:12px;padding:10px 14px;margin-top:12px;flex-wrap:wrap}
+.codebox span{display:block;font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.codebox b{font:700 28px/1.1 Fraunces,serif;letter-spacing:.08em}
+.counts{font-size:14px;color:var(--ink2);margin-top:12px}
+.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+
+/* editor */
+.editor .form{margin-top:16px}
+.qlist{display:grid;gap:12px}
+.qe{padding:16px}
+.qe-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.qnum{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:700 14px Fraunces,serif;flex-shrink:0}
+.qe-head select{width:auto;flex:1;min-width:170px;padding:8px 10px;font-size:14.5px}
+.pts{display:flex;align-items:center;gap:6px;font-size:13.5px;color:var(--ink2);font-weight:600}
+.pts input{width:72px!important;padding:8px!important;font-size:14.5px!important}
+.qe-tools{display:flex;margin-left:auto}
+.opts-edit{display:grid;gap:8px;margin-top:10px}
+.oe{display:flex;align-items:center;gap:8px}
+.oe input:not([type=radio]){flex:1}
+.radio{position:relative;cursor:pointer;flex-shrink:0}
+.radio input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.radio span{width:38px;height:38px;border-radius:10px;border:1.5px solid var(--line2);display:grid;place-items:center;font-weight:700;color:var(--ink2);background:#fff}
+.oe.right .radio span{background:var(--ok);border-color:var(--ok);color:#fff}
+.oe.right input:not([type=radio]){border-color:#9fcbb0;background:#f6fbf8}
+.radio input:focus-visible+span{outline:3px solid #9db4ef}
+.oe-foot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}
+.oe-foot .hint{margin:0}
+.addq{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px;padding:14px;border:1.5px dashed var(--line2);border-radius:var(--r)}
+.addq>span{font-weight:600;font-size:14px;color:var(--ink2);margin-right:4px}
+.savebar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,253,248,.96);backdrop-filter:blur(6px);border-top:1px solid var(--line);padding:10px 0;z-index:18}
+.savebar .wrap{display:flex;gap:10px;justify-content:flex-end}
+
+/* results */
+.res-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.res-head h1{margin-top:8px}
+.res-head .actions{margin-top:4px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:18px}
+.tile{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px}
+.tile span{font-size:12.5px;color:var(--muted);font-weight:600}
+.tile b{display:block;font:700 26px/1.15 Fraunces,serif;margin-top:4px;font-variant-numeric:tabular-nums}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.bars{display:grid;gap:8px;margin-top:12px}
+.bar-row{display:grid;grid-template-columns:64px 1fr 40px;align-items:center;gap:10px;font-size:13.5px}
+.bar-row .bl{color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-row b{text-align:right;font-variant-numeric:tabular-nums}
+.bt{height:14px;background:#efe9dc;border-radius:4px;overflow:hidden}
+.bt i{display:block;height:100%;background:var(--ink);border-radius:4px;min-width:2px}
+.bt i.g{background:var(--ok)}.bt i.a{background:#d39a2c}.bt i.r{background:var(--acc)}
+.table-card{margin-top:12px;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px}
+th{text-align:left;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line);background:#faf7f0;white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid #efe9dc;font-variant-numeric:tabular-nums}
+tbody tr{cursor:pointer}tbody tr:hover{background:#faf6ec}
+td.nm{font-weight:600}
+.nota{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;font-weight:700;background:#ece8de}
+.nota.n5,.nota.n4{background:var(--oksoft);color:var(--ok)}.nota.n3{background:var(--infosoft);color:var(--info)}.nota.n2{background:var(--warnsoft);color:var(--warn)}.nota.n1{background:var(--badsoft);color:var(--bad)}
+.lg-warn{color:var(--warn);font-weight:700}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:50;background:rgba(20,26,42,.5);display:flex;align-items:center;justify-content:center;padding:18px;animation:fade .15s}
+.modal[hidden]{display:none}
+@keyframes fade{from{opacity:0}}
+.sheet{background:var(--paper);border-radius:16px;max-width:640px;width:100%;max-height:calc(100vh - 36px);overflow:auto;padding:22px;box-shadow:0 24px 60px -20px rgba(0,0,0,.45)}
+.modal.small .sheet{max-width:420px}
+.modal.small h3{margin-bottom:8px}
+.modal.full{padding:0;background:var(--ink)}
+.modal.full .sheet{max-width:none;max-height:none;height:100%;border-radius:0;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center}
+.proj{max-width:980px;width:100%;padding:20px}
+.proj .eyebrow{color:#ffb8a8;font-size:15px}
+.proj h1{font-size:clamp(30px,5vw,54px)}
+.proj ol{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:16px;font-size:clamp(18px,2.4vw,26px)}
+.proj li{display:flex;gap:16px;align-items:baseline}
+.proj li>i{font-style:normal;flex-shrink:0;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center;font:700 20px Fraunces,serif}
+.proj .url{font-weight:700;color:#ffd58a;word-break:break-all}
+.proj .bigcode{font:700 clamp(64px,13vw,150px)/1 Fraunces,serif;letter-spacing:.08em;background:#fff;color:var(--ink);border-radius:20px;padding:16px 30px;display:inline-block;margin-top:8px}
+.proj .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:30px;flex-wrap:wrap;font-size:18px;opacity:.9}
+.sub-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.sub-facts{display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px;color:var(--ink2);margin:8px 0 14px}
+.ans-row{border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:10px;padding:12px;margin-top:8px}
+.ans-row.bad{border-left-color:var(--acc)}
+.ar-h{font-weight:600;white-space:pre-wrap}
+.ar-b{display:grid;gap:2px;font-size:14px;color:var(--ink2);margin:6px 0 8px}
+.copy-area{width:100%;min-height:200px;font:13px ui-monospace,monospace!important}
+
+.bank-filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:18px 0 6px}
+.bank-filters select{width:auto;min-width:220px;padding:9px 12px}
+.grp{display:flex;align-items:center;gap:10px;margin:26px 0 10px;font-size:20px}
+.grp .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:18px;background:color-mix(in srgb,var(--c) 14%,#fff)}
+.bank-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}
+.bq{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:var(--r);padding:16px;box-shadow:var(--sh);display:flex;flex-direction:column}
+.bq-top{display:flex;gap:6px;margin-bottom:8px}
+.bq h4{font:700 17px/1.25 Fraunces,serif;margin:0}
+.bq .actions{margin-top:auto;padding-top:14px}
+.pv-q{border-top:1px solid var(--line);padding:12px 0}
+.pv-q b.n{font-family:Fraunces,serif;margin-right:4px}
+.pv-q ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:4px}
+.pv-q li{font-size:14.5px;padding:6px 10px;border-radius:8px;background:var(--bg)}
+.pv-q li.ok{background:var(--oksoft);color:var(--ok);font-weight:600}
+.pv-q .pts{display:inline;font-size:12.5px;color:var(--muted);font-weight:600}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-size:15px;z-index:60;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);max-width:calc(100vw - 30px);animation:up .2s}
+.toast.err{background:var(--bad)}.toast.ok{background:var(--ok)}.toast.warn{background:#8a5a0b}
+.toast[hidden]{display:none}
+@keyframes up{from{transform:translate(-50%,10px);opacity:0}}
+
+@media (max-width:640px){
+  .wrap{padding:0 14px}.pad{padding:18px}
+  .row3{grid-template-columns:1fr 1fr}.row3>.field:first-child{grid-column:1/-1}
+  .two-col{grid-template-columns:1fr}
+  .qcard-pub{flex-direction:column;align-items:stretch}
+  .facts b{font-size:19px}
+  .subjects{grid-template-columns:1fr 1fr;gap:10px}
+  .subj{grid-template-columns:1fr;grid-template-rows:auto;row-gap:6px;padding:12px}
+  .subj .ic{grid-row:auto;width:38px;height:38px;font-size:19px}
+  .subj .nm{font-size:14px}.subj .ct{font-size:12.5px}
+  .brand small{display:none}.who{display:none}
+  .opts.two{grid-template-columns:1fr}
+  .savebar .wrap .btn{flex:1}
+  .hero-actions .btn{width:100%}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <button class="brand" id="brand" data-act="home"><span class="logo">K</span><span><b>Kuizet</b><small id="brand-sub"></small></span></button>
+  <span class="sp"></span>
+  <div id="hdr-right" style="display:flex;align-items:center;gap:4px"></div>
+</div></header>
+<main id="app"></main>
+<div id="modal" class="modal" hidden></div>
+<div id="toast" class="toast" hidden role="status" aria-live="polite"></div>
+
+<script>
+
+</script>
+<script>
+(function () {
+'use strict';
+
+// ================= KONFIGURIMI =================
+var SHKOLLA = 'Gjimnazi i Shkencave Natyrore';
+// Link i shkurtër që shfaqet në projektor (p.sh. 'bit.ly/kuizet-gjimnazi'). Lëre bosh për linkun e plotë.
+var LINKU_I_SHKURTER = '';
+// Linku i Google Apps Script (…/exec). Plotësoje kur faqja hostohet jashtë Google-it, p.sh. në GitHub Pages.
+var API_URL = '';
+var LENDET = [
+  { n: 'Matematikë', i: '📐', c: '#2b59c3' },
+  { n: 'Fizikë', i: '⚛️', c: '#6a3fb5' },
+  { n: 'Kimi', i: '🧪', c: '#0f8b8d' },
+  { n: 'Biologji', i: '🧬', c: '#2d7a4b' },
+  { n: 'Informatikë', i: '💻', c: '#3d4f66' },
+  { n: 'Gjuhë shqipe dhe letërsi', i: '📖', c: '#c23b22' },
+  { n: 'Gjuhë angleze', i: '🗣️', c: '#b5651d' },
+  { n: 'Gjuhë gjermane', i: '💬', c: '#8a6d1d' },
+  { n: 'Gjuhë frënge', i: '💬', c: '#9c4f7a' },
+  { n: 'Histori', i: '🏛️', c: '#7a4b2a' },
+  { n: 'Gjeografi', i: '🌍', c: '#1f7a8c' },
+  { n: 'Edukatë qytetare', i: '⚖️', c: '#5a6b2a' },
+  { n: 'Filozofi', i: '🤔', c: '#5d4a8a' },
+  { n: 'Sociologji', i: '👥', c: '#a0522d' },
+  { n: 'Psikologji', i: '🧠', c: '#b03a6b' },
+  { n: 'Art figurativ', i: '🎨', c: '#c77700' },
+  { n: 'Edukatë muzikore', i: '🎵', c: '#3d6ea8' },
+  { n: 'Edukatë fizike', i: '⚽', c: '#2e8540' }
+];
+// ===============================================
+
+var HAS_GAS = typeof google !== 'undefined' && google.script && google.script.run;
+var LOKAL = !HAS_GAS && typeof window.Lokal !== 'undefined';
+var KEY_ATT = 'kuizet_aktiv', KEY_ME = 'kuizet_nxenesi', KEY_T = 'kuizet_mesuesi';
+var L = 'ABCDEFGH';
+
+// ---------- helpers ----------
+function $(s) { return document.querySelector(s); }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function mkStore(get) { return {
+  get: function (k, d) { try { var v = get().getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set: function (k, v) { try { get().setItem(k, JSON.stringify(v)); } catch (e) {} },
+  del: function (k) { try { get().removeItem(k); } catch (e) {} }
+}; }
+var store = mkStore(function () { return window.localStorage; });
+var sess = mkStore(function () { return window.sessionStorage; });
+function lenda(n) { for (var i = 0; i < LENDET.length; i++) if (LENDET[i].n === n) return LENDET[i]; return { n: n, i: '📘', c: '#5b6478' }; }
+function fmtNum(x) { if (x == null || isNaN(x)) return '–'; return String(Math.round(Number(x) * 10) / 10).replace('.', ','); }
+function fmtCode(c) { c = String(c || ''); return c.slice(0, 3) + ' ' + c.slice(3); }
+function fmtClock(ms) { if (ms < 0) ms = 0; var s = Math.ceil(ms / 1000), m = Math.floor(s / 60); s = s % 60; return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s; }
+function fmtTime(ms) { if (!ms) return '–'; var d = new Date(ms); return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
+function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+function clone(o) { return JSON.parse(JSON.stringify(o)); }
+
+function api(action, p) {
+  return new Promise(function (resolve, reject) {
+    var done = function (r) { if (r && r.ok) resolve(r.data); else reject(new Error((r && r.error) || 'Ndodhi një gabim.')); };
+    if (HAS_GAS) {
+      google.script.run.withSuccessHandler(done).withFailureHandler(function () {
+        reject(new Error('Nuk u lidh me serverin. Kontrollo internetin dhe provo përsëri.'));
+      }).api(action, p || {});
+    } else if (API_URL) {
+      fetch(API_URL, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: action, p: p || {} }) })
+        .then(function (r) { return r.json(); }).then(done)
+        .catch(function () { reject(new Error('Nuk u lidh me serverin. Kontrollo internetin dhe provo përsëri.')); });
+    } else if (LOKAL) {
+      setTimeout(function () { done(window.Lokal.api(action, clone(p || {}))); }, 160);
+    } else reject(new Error('Serveri nuk është i lidhur.'));
+  });
+}
+function tapi(action, p) {
+  var o = clone(p || {}); o.pin = S.teacher && S.teacher.pin;
+  return api(action, o).catch(function (e) {
+    if (/PIN|Kyçu/.test(e.message)) { S.teacher = null; sess.del(KEY_T); setTimeout(function () { go('tlogin'); }, 0); }
+    throw e;
+  });
+}
+
+var S = { view: 'home', fk: 0, lista: null, listaAt: 0, lenda: null, teacher: sess.get(KEY_T, null), tq: null, tf: 'all', draft: null, dirty: false, res: null, resPar: '', live: false, att: null, result: null, bank: null, bl: '', bk: 0 };
+var app = $('#app');
+
+function go(view, params) {
+  if (params) for (var k in params) S[k] = params[k];
+  if (view !== 'take') clearInterval(S.timer);
+  if (view !== 'tres') { clearInterval(S.liveT); S.live = false; }
+  S.view = view; render(); window.scrollTo(0, 0);
+}
+function render() {
+  document.body.classList.toggle('taking', S.view === 'take');
+  renderHeader();
+  (VIEWS[S.view] || VIEWS.home)();
+}
+function renderHeader() {
+  $('#brand-sub').textContent = SHKOLLA;
+  var h = $('#hdr-right');
+  if (S.teacher) h.innerHTML = '<span class="who">' + esc(S.teacher.emri) + '</span><button class="btn sm ghost" data-act="tdash">Paneli</button><button class="btn sm ghost" data-act="logout">Dil</button>';
+  else h.innerHTML = '<button class="btn sm ghost" data-act="tlogin">Mësimdhënës</button>';
+}
+
+function toast(msg, kind, ms) {
+  var t = $('#toast'); t.textContent = msg; t.className = 'toast ' + (kind || ''); t.hidden = false;
+  clearTimeout(S._tt); S._tt = setTimeout(function () { t.hidden = true; }, ms || 3400);
+}
+function modal(html, cls) {
+  var m = $('#modal'); m.className = 'modal ' + (cls || ''); m.innerHTML = '<div class="sheet" role="dialog" aria-modal="true">' + html + '</div>';
+  m.hidden = false; document.body.classList.add('noscroll');
+}
+function closeModal() {
+  var m = $('#modal'); m.hidden = true; m.innerHTML = ''; document.body.classList.remove('noscroll'); S.modalSub = null;
+  if (S._cf) { var f = S._cf; S._cf = null; f(false); }
+}
+function confirmBox(title, text, ok, danger) {
+  return new Promise(function (res) {
+    modal('<h3>' + esc(title) + '</h3><p class="muted">' + esc(text) + '</p><div class="btn-row end"><button class="btn" data-act="close">Anulo</button><button class="btn ' + (danger ? 'danger-solid' : 'primary') + '" data-act="cfok">' + esc(ok) + '</button></div>', 'small');
+    S._cf = res;
+  });
+}
+function busy(btn, on) { if (!btn) return; btn.disabled = on; btn.classList.toggle('loading', on); }
+function skeletonCards(n, h) { var s = ''; for (var i = 0; i < n; i++) s += '<div class="skel" style="height:' + (h || 76) + 'px"></div>'; return s; }
+function statusBadge(s) { return s === 'hapur' ? '<span class="badge ok">Hapur</span>' : s === 'mbyllur' ? '<span class="badge bad">Mbyllur</span>' : '<span class="badge gray">Draft</span>'; }
+function segKlasa() {
+  return '<div class="seg" role="group" aria-label="Klasa">' + [[0, 'Të gjitha'], [10, 'Klasa 10'], [11, '11'], [12, '12']].map(function (x) {
+    return '<button class="' + (S.fk === x[0] ? 'on' : '') + '" data-act="fk" data-v="' + x[0] + '">' + x[1] + '</button>';
+  }).join('') + '</div>';
+}
+
+// ---------- data loaders ----------
+function loadLista() {
+  if (S.loadingLista) return; S.loadingLista = true; S.listaAt = Date.now();
+  api('lista').then(function (d) { S.lista = d; }).catch(function (e) { if (S.lista === null) S.lista = []; toast(e.message, 'err'); })
+    .then(function () { S.loadingLista = false; if (S.view === 'home' || S.view === 'subject') render(); });
+}
+function loadTq() {
+  tapi('kuizetEMia').then(function (d) { S.tq = d; if (S.view === 'tdash') render(); }).catch(function (e) { S.tq = []; toast(e.message, 'err'); if (S.view === 'tdash') render(); });
+}
+function loadRes(quiet) {
+  var id = S.resId;
+  return tapi('rezultatet', { id: id }).then(function (d) {
+    if (S.resId !== id) return; S.res = d;
+    if (S.view === 'tres') { render(); if (S.modalSub) showSub(S.modalSub); }
+  }).catch(function (e) { if (!quiet) toast(e.message, 'err'); });
+}
+
+// ================= VIEWS =================
+var VIEWS = {};
+
+VIEWS.home = function () {
+  var lista = S.lista;
+  var cnt = {};
+  (lista || []).forEach(function (q) { if (!S.fk || q.klasa === S.fk) cnt[q.lenda] = (cnt[q.lenda] || 0) + 1; });
+  var subs = LENDET.slice();
+  (lista || []).forEach(function (q) { if (!subs.some(function (l) { return l.n === q.lenda; })) subs.push(lenda(q.lenda)); });
+  app.innerHTML = '<div class="wrap">' +
+    '<section class="hero"><p class="eyebrow">' + esc(SHKOLLA) + ' · Klasat 10–12</p>' +
+    '<h1>Kuizet e orës së mësimit</h1>' +
+    '<p class="lead">Mësimdhënësit publikojnë kuizet sipas lëndës. Nxënësit hyjnë me kodin që jep mësimdhënësi në klasë dhe i plotësojnë brenda kohës së caktuar.</p>' +
+    '<div class="hero-actions"><button class="btn acc lg" data-act="join">Jam nxënës · Hyr me kod</button>' +
+    '<button class="btn lg" data-act="tlogin">' + (S.teacher ? 'Paneli i mësimdhënësit' : 'Jam mësimdhënës') + '</button></div></section>' +
+    '<section><div class="section-head"><h2>Kuizet sipas lëndëve</h2>' + segKlasa() + '</div>' +
+    '<div class="grid subjects">' + (lista === null ? skeletonCards(8, 74) : subs.map(function (l) {
+      var n = cnt[l.n] || 0;
+      return '<button class="subj ' + (n ? '' : 'empty') + '" style="--c:' + l.c + '" data-act="subject" data-v="' + esc(l.n) + '">' +
+        '<span class="ic" aria-hidden="true">' + l.i + '</span><span class="nm">' + esc(l.n) + '</span>' +
+        '<span class="ct">' + (n ? n + (n === 1 ? ' kuiz i hapur' : ' kuize të hapura') : 'Asnjë kuiz tani') + '</span></button>';
+    }).join('')) + '</div></section>' +
+    '<section class="how"><h2>Si plotësohet një kuiz</h2><ol class="steps">' +
+    '<li><b>Hap këtë faqe</b><span>Në telefon ose kompjuter, gjatë orës së mësimit.</span></li>' +
+    '<li><b>Shkruaj kodin</b><span>Kodin 6-shifror që mësimdhënësi e shfaq në tabelë ose në projektor.</span></li>' +
+    '<li><b>Plotëso dhe dorëzo</b><span>Shkruaj emrin, mbiemrin dhe paralelen. Kur mbaron koha, kuizi dorëzohet vetë.</span></li>' +
+    '</ol></section></div>';
+  if (lista === null || Date.now() - S.listaAt > 30000) loadLista();
+};
+
+VIEWS.subject = function () {
+  var l = lenda(S.lenda);
+  var list = (S.lista || []).filter(function (q) { return q.lenda === S.lenda && (!S.fk || q.klasa === S.fk); });
+  app.innerHTML = '<div class="wrap"><button class="btn link" data-act="home">‹ Të gjitha lëndët</button>' +
+    '<div class="subj-head" style="--c:' + l.c + '"><span class="ic big" aria-hidden="true">' + l.i + '</span><div><p class="eyebrow">Lënda</p><h1>' + esc(l.n) + '</h1></div></div>' +
+    '<div class="section-head"><h2>Kuizet e hapura</h2>' + segKlasa() + '</div>' +
+    (S.lista === null ? '<div class="list">' + skeletonCards(3) + '</div>' : list.length ? '<div class="list">' + list.map(function (q) {
+      return '<article class="qcard-pub" style="--c:' + l.c + '"><div><h3>' + esc(q.titulli) + '</h3><p class="meta">Klasa ' + q.klasa +
+        (q.paralelet ? ' · Paralelet ' + esc(q.paralelet) : '') + ' · ' + q.kohezgjatja + ' min · ' + q.nPyetje + ' pyetje · ' + esc(q.mesimdhenesi) + '</p></div>' +
+        '<button class="btn primary" data-act="join" data-v="' + esc(q.id) + '">Hyr me kod</button></article>';
+    }).join('') + '</div>' : '<div class="empty-state"><p><b>Nuk ka kuize të hapura' + (S.fk ? ' për klasën ' + S.fk : '') + ' në këtë lëndë tani.</b></p><p class="muted">Kuizet shfaqen këtu sapo mësimdhënësi t\'i publikojë.</p></div>') +
+    '</div>';
+  if (S.lista === null || Date.now() - S.listaAt > 30000) loadLista();
+};
+
+VIEWS.join = function () {
+  var hint = null;
+  if (S.joinFor) (S.lista || []).forEach(function (q) { if (q.id === S.joinFor) hint = q; });
+  app.innerHTML = '<div class="wrap narrow"><button class="btn link" data-act="back">‹ Kthehu</button>' +
+    '<form class="card pad center" data-form="code" novalidate><p class="eyebrow">Hyrja e nxënësit</p><h1>Shkruaj kodin e kuizit</h1>' +
+    (hint ? '<p class="mt">Po hyn në: <b>' + esc(hint.titulli) + '</b></p>' : '') +
+    '<p class="muted mt">Kodi ka 6 shifra dhe e jep mësimdhënësi në klasë.</p>' +
+    '<input id="code" class="code-input" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="······" aria-label="Kodi i kuizit">' +
+    '<button class="btn acc lg block" type="submit">Vazhdo</button></form></div>';
+  setTimeout(function () { var c = $('#code'); if (c) c.focus(); }, 60);
+};
+
+VIEWS.intro = function () {
+  var q = S.quiz, l = lenda(q.lenda), me = store.get(KEY_ME, {});
+  app.innerHTML = '<div class="wrap narrow"><button class="btn link" data-act="join">‹ Kod tjetër</button>' +
+    '<div class="card pad"><span class="chip" style="--c:' + l.c + '">' + l.i + ' ' + esc(q.lenda) + '</span>' +
+    '<h1 class="mt">' + esc(q.titulli) + '</h1>' +
+    '<div class="facts"><div><b>' + q.klasa + '</b><span>klasa</span></div><div><b>' + q.kohezgjatja + '</b><span>minuta</span></div><div><b>' + q.nPyetje + '</b><span>pyetje</span></div><div><b>' + fmtNum(q.maks) + '</b><span>pikë</span></div></div>' +
+    '<p class="muted small">Mësimdhënësi: ' + esc(q.mesimdhenesi) + (q.paralelet ? ' · Paralelet: ' + esc(q.paralelet) : '') + '</p>' +
+    (q.udhezimet ? '<div class="instr"><b>Udhëzimet e mësimdhënësit</b><p>' + esc(q.udhezimet) + '</p></div>' : '') +
+    '<ul class="rules"><li>Koha fillon sapo të shtypësh <b>Fillo kuizin</b>.</li><li>Mos e mbyll faqen dhe mos kalo në aplikacione të tjera — çdo largim regjistrohet.</li><li>Kur mbaron koha, përgjigjet dorëzohen automatikisht.</li><li>Kuizin mund ta plotësosh vetëm një herë.</li></ul></div>' +
+    '<form class="card pad" data-form="start" novalidate><h3>Të dhënat e tua</h3>' +
+    '<label class="field"><span>Emri dhe mbiemri</span><input name="emri" autocomplete="name" value="' + esc(me.emri || '') + '" placeholder="p.sh. Arta Gashi"></label>' +
+    '<div class="row2"><label class="field"><span>Klasa</span><select name="klasa">' + [10, 11, 12].map(function (k) { return '<option value="' + k + '"' + (k === q.klasa ? ' selected' : '') + '>' + k + '</option>'; }).join('') + '</select></label>' +
+    '<label class="field"><span>Paralelja</span><input name="paralelja" inputmode="numeric" value="' + esc(me.paralelja || '') + '" placeholder="p.sh. 3"></label></div>' +
+    '<button class="btn acc lg block" type="submit">Fillo kuizin</button></form></div>';
+};
+
+function isAns(a, q) { var v = a.answers[q.i]; return v !== undefined && v !== null && String(v).trim() !== ''; }
+function countAnswered(a) { return a.pyetjet.filter(function (q) { return isAns(a, q); }).length; }
+function renderAnswer(a, q) {
+  var v = a.answers[q.i];
+  if (q.lloji === 'zgjedhje') return '<div class="opts">' + q.opsionet.map(function (o, j) {
+    return '<button class="opt ' + (v === j ? 'sel' : '') + '" data-act="ans" data-v="' + j + '" aria-pressed="' + (v === j) + '"><span class="letter">' + L[j] + '</span><span>' + esc(o) + '</span></button>';
+  }).join('') + '</div>';
+  if (q.lloji === 'vf') return '<div class="opts two">' +
+    '<button class="opt ' + (v === true ? 'sel' : '') + '" data-act="ans" data-v="true" aria-pressed="' + (v === true) + '"><span class="letter">V</span><span>E vërtetë</span></button>' +
+    '<button class="opt ' + (v === false ? 'sel' : '') + '" data-act="ans" data-v="false" aria-pressed="' + (v === false) + '"><span class="letter">G</span><span>E gabuar</span></button></div>';
+  return '<label class="field"><span>Përgjigjja jote</span><input id="short-ans" autocomplete="off" value="' + esc(v || '') + '" placeholder="Shkruaj përgjigjen këtu"></label>';
+}
+VIEWS.take = function () {
+  var a = S.att; if (!a) { go('home'); return; }
+  var n = a.pyetjet.length, answered = countAnswered(a), body;
+  if (a.review) {
+    body = '<div class="card pad"><h2>Rishiko para dorëzimit</h2><p class="muted mt">' + answered + ' nga ' + n + ' pyetje kanë përgjigje.' + (answered < n ? ' Kliko një pyetje për t\'u kthyer tek ajo.' : '') + '</p>' +
+      '<div class="review-grid">' + a.pyetjet.map(function (q, k) {
+        var ok = isAns(a, q);
+        return '<button class="rv ' + (ok ? 'done' : 'todo') + '" data-act="goto" data-v="' + k + '"><b>' + (k + 1) + '</b><span>' + (ok ? 'Përgjigjur' : 'Pa përgjigje') + '</span></button>';
+      }).join('') + '</div><div class="btn-row"><button class="btn" data-act="goto" data-v="' + a.idx + '">‹ Kthehu te pyetjet</button><button class="btn acc lg" data-act="submit">Dorëzo përgjigjet</button></div></div>';
+  } else {
+    var q = a.pyetjet[a.idx];
+    body = '<div class="card pad"><p class="qmeta">Pyetja ' + (a.idx + 1) + ' nga ' + n + ' · ' + fmtNum(q.piket) + ' pikë</p>' +
+      '<h2 class="qtext">' + esc(q.teksti) + '</h2>' + renderAnswer(a, q) + '</div>' +
+      '<div class="qnav"><button class="btn" data-act="prev"' + (a.idx === 0 ? ' disabled' : '') + '>‹ Para</button>' +
+      (a.idx < n - 1 ? '<button class="btn primary" data-act="next">Tjetra ›</button>' : '<button class="btn acc" data-act="review">Rishiko dhe dorëzo</button>') + '</div>' +
+      '<div class="dots">' + a.pyetjet.map(function (p, k) {
+        return '<button class="dot ' + (k === a.idx ? 'cur ' : '') + (isAns(a, p) ? 'ok' : '') + '" data-act="goto" data-v="' + k + '" aria-label="Pyetja ' + (k + 1) + '">' + (k + 1) + '</button>';
+      }).join('') + '</div>';
+  }
+  app.innerHTML = '<div class="take-bar"><div class="wrap"><div class="tb-l"><b>' + esc(a.kuiz.titulli) + '</b><span>' + esc(a.emri) + ' · ' + a.klasa + '/' + esc(a.paralelja) + '</span></div>' +
+    '<div id="timer" class="timer" aria-label="Koha e mbetur">--:--</div></div><div class="prog"><i style="width:' + Math.round(answered / n * 100) + '%"></i></div></div>' +
+    '<div class="wrap narrow take">' + body + '</div>';
+  startTimer();
+};
+function refreshProgress() {
+  var a = S.att; if (!a) return;
+  var i = document.querySelector('.prog i'); if (i) i.style.width = Math.round(countAnswered(a) / a.pyetjet.length * 100) + '%';
+  var d = document.querySelector('.dot.cur'); if (d) d.classList.toggle('ok', isAns(a, a.pyetjet[a.idx]));
+}
+function startTimer() {
+  clearInterval(S.timer);
+  var tick = function () {
+    var a = S.att, el = $('#timer');
+    if (!a || !el) { clearInterval(S.timer); return; }
+    var left = a.deadline - Date.now();
+    el.textContent = fmtClock(left);
+    el.classList.toggle('low', left < 60000);
+    el.classList.toggle('mid', left >= 60000 && left < 300000);
+    if (left <= 0) { clearInterval(S.timer); submitAttempt(true); }
+  };
+  tick(); S.timer = setInterval(tick, 500);
+}
+function startTake(d, who) {
+  var prev = store.get(KEY_ATT, null), same = prev && prev.id === d.id;
+  S.att = {
+    id: d.id, kodi: who.kodi, emri: who.emri, klasa: who.klasa, paralelja: who.paralelja, kuiz: d.kuiz, pyetjet: d.pyetjet,
+    deadline: Date.now() + (d.afati - d.tani), answers: same ? prev.answers || {} : {}, largime: same ? prev.largime || 0 : 0,
+    idx: same ? Math.min(prev.idx || 0, d.pyetjet.length - 1) : 0, review: false
+  };
+  saveAtt(); go('take');
+}
+function saveAtt() {
+  var a = S.att; if (!a) return;
+  store.set(KEY_ATT, { id: a.id, kodi: a.kodi, emri: a.emri, klasa: a.klasa, paralelja: a.paralelja, titulli: a.kuiz.titulli, answers: a.answers, largime: a.largime, idx: a.idx });
+}
+function submitAttempt(auto) {
+  var a = S.att; if (!a || a.sending) return; a.sending = true;
+  if (auto) toast('Koha mbaroi — po dorëzohen përgjigjet…', 'warn');
+  var btn = document.querySelector('[data-act=submit]'); busy(btn, true);
+  var tries = auto ? 4 : 1;
+  (function attempt(k) {
+    api('dorezo', { id: a.id, pergjigjet: a.answers, largime: a.largime }).then(function (r) {
+      store.del(KEY_ATT); clearInterval(S.timer); S.att = null;
+      r.titulli = a.kuiz.titulli; r.emri = a.emri;
+      go('done', { result: r });
+    }).catch(function (e) {
+      if (k + 1 < tries) { setTimeout(function () { attempt(k + 1); }, 2500); return; }
+      a.sending = false; busy(btn, false);
+      toast(e.message + ' Përgjigjet janë ruajtur në pajisje — provo përsëri.', 'err', 7000);
+      if (auto) { a.review = true; render(); }
+    });
+  })(0);
+}
+
+VIEWS.done = function () {
+  var r = S.result || {};
+  app.innerHTML = '<div class="wrap narrow"><div class="card pad center done"><div class="check" aria-hidden="true">✓</div>' +
+    '<h1>Përgjigjet u dorëzuan</h1><p class="muted mt">' + esc(r.emri || '') + ' · ' + esc(r.titulli || '') + (r.statusi === 'me_vonese' ? ' · <span class="badge warn">me vonesë</span>' : '') + '</p>' +
+    (r.shfaq ? '<div class="score"><div class="ring" style="--p:' + (r.perqindja || 0) + '"><b>' + fmtNum(r.perqindja) + '%</b></div><div class="score-facts"><div><b>' + fmtNum(r.piket) + ' / ' + fmtNum(r.maks) + '</b><span>pikë</span></div><div><b>' + r.nota + '</b><span>nota</span></div></div></div>'
+      : '<p class="lead">Rezultatin do ta shpallë mësimdhënësi.</p>') +
+    '<button class="btn primary lg" data-act="home">Kthehu në fillim</button></div></div>';
+};
+
+VIEWS.tlogin = function () {
+  if (S.teacher) { go('tdash'); return; }
+  app.innerHTML = '<div class="wrap narrow"><button class="btn link" data-act="home">‹ Kryefaqja</button>' +
+    '<form class="card pad center" data-form="login" novalidate><p class="eyebrow">Mësimdhënësit</p><h1>Hyr në panel</h1>' +
+    '<p class="muted mt">Shkruaj PIN-in tënd personal. PIN-in e cakton administratori i shkollës.</p>' +
+    '<input id="pin" name="pin" type="password" inputmode="numeric" class="code-input" autocomplete="current-password" placeholder="PIN" aria-label="PIN">' +
+    '<button class="btn primary lg block" type="submit">Hyr</button>' + '</form></div>';
+  setTimeout(function () { var c = $('#pin'); if (c) c.focus(); }, 60);
+};
+
+function tqCard(q) {
+  var l = lenda(q.lenda);
+  return '<article class="tq" style="--c:' + l.c + '"><div class="tq-top"><span class="chip">' + l.i + ' ' + esc(q.lenda) + '</span>' + statusBadge(q.statusi) + '</div>' +
+    '<h3>' + esc(q.titulli) + '</h3><p class="meta">Klasa ' + q.klasa + (q.paralelet ? ' (' + esc(q.paralelet) + ')' : '') + ' · ' + q.nPyetje + ' pyetje · ' + fmtNum(q.maks) + ' pikë · ' + q.kohezgjatja + ' min</p>' +
+    (q.statusi === 'hapur' ? '<div class="codebox"><div><span>Kodi për nxënësit</span><b>' + fmtCode(q.kodi) + '</b></div><button class="btn sm" data-act="proj" data-v="' + q.id + '">Shfaq në projektor</button></div>' : '') +
+    '<p class="counts"><b>' + q.dorezuar + '</b> ' + (q.dorezuar === 1 ? 'dorëzim' : 'dorëzime') + (q.neVazhdim ? ' · <b>' + q.neVazhdim + '</b> në vazhdim' : '') + '</p>' +
+    '<div class="actions"><button class="btn sm primary" data-act="tres" data-v="' + q.id + '">Rezultatet</button>' +
+    '<button class="btn sm" data-act="tedit" data-v="' + q.id + '">Ndrysho</button>' +
+    (q.statusi === 'hapur' ? '<button class="btn sm" data-act="status" data-v="' + q.id + '" data-s="mbyllur">Mbyll</button>'
+      : '<button class="btn sm" data-act="status" data-v="' + q.id + '" data-s="hapur">' + (q.statusi === 'draft' ? 'Publiko' : 'Rihap') + '</button>') +
+    '<button class="btn sm" data-act="dup" data-v="' + q.id + '">Dyfisho</button>' +
+    '<button class="btn sm danger" data-act="del" data-v="' + q.id + '">Fshi</button></div></article>';
+}
+VIEWS.tdash = function () {
+  if (!S.teacher) { go('tlogin'); return; }
+  var list = S.tq, f = S.tf;
+  var c = function (k) { return (list || []).filter(function (q) { return q.statusi === k; }).length; };
+  var shown = (list || []).filter(function (q) { return f === 'all' || q.statusi === f; });
+  app.innerHTML = '<div class="wrap"><div class="section-head top-gap"><div><p class="eyebrow">Paneli i mësimdhënësit</p><h1>Mirë se erdhe, ' + esc(S.teacher.emri) + '</h1></div>' +
+    '<div class="actions" style="margin:0"><button class="btn" data-act="tbank">📚 Banka e kuizeve</button><button class="btn acc" data-act="tnew">+ Kuiz i ri</button></div></div>' +
+    '<div class="tabs">' + [['all', 'Të gjitha', (list || []).length], ['hapur', 'Të hapura', c('hapur')], ['draft', 'Draft', c('draft')], ['mbyllur', 'Të mbyllura', c('mbyllur')]].map(function (t) {
+      return '<button class="tab ' + (f === t[0] ? 'on' : '') + '" data-act="tf" data-v="' + t[0] + '">' + t[1] + ' <span>' + t[2] + '</span></button>';
+    }).join('') + '</div>' +
+    (list === null ? '<div class="list">' + skeletonCards(3, 150) + '</div>' : shown.length ? '<div class="list">' + shown.map(tqCard).join('') + '</div>'
+      : '<div class="empty-state"><p><b>' + (list.length ? 'Asnjë kuiz në këtë kategori.' : 'Ende nuk ke krijuar asnjë kuiz.') + '</b></p><p class="muted">Krijo një kuiz ose merr një të gatshëm nga banka, publikoje dhe jepu nxënësve kodin në orë.</p><div class="btn-row" style="justify-content:center"><button class="btn" data-act="tbank">📚 Banka e kuizeve</button><button class="btn acc" data-act="tnew">+ Krijo kuiz</button></div></div>') +
+    '</div>';
+  if (list === null) loadTq();
+};
+
+function lendaOrder(n) { for (var i = 0; i < LENDET.length; i++) if (LENDET[i].n === n) return i; return 99; }
+VIEWS.tbank = function () {
+  if (!S.teacher) { go('tlogin'); return; }
+  var B = S.bank;
+  if (!B) {
+    app.innerHTML = '<div class="wrap"><div class="list">' + skeletonCards(1, 90) + skeletonCards(3, 130) + '</div></div>';
+    tapi('banka').then(function (d) { S.bank = d; if (S.view === 'tbank') render(); }).catch(function (e) { toast(e.message, 'err'); });
+    return;
+  }
+  var lendet = [];
+  B.forEach(function (b) { if (lendet.indexOf(b.lenda) < 0) lendet.push(b.lenda); });
+  lendet.sort(function (a, b) { return lendaOrder(a) - lendaOrder(b); });
+  var shown = B.filter(function (b) { return (!S.bl || b.lenda === S.bl) && (!S.bk || b.klasa === S.bk); });
+  var nQ = B.reduce(function (s, b) { return s + b.nPyetje; }, 0);
+  var segs = '<div class="seg" role="group" aria-label="Klasa">' + [[0, 'Të gjitha'], [10, 'Klasa 10'], [11, '11'], [12, '12']].map(function (x) {
+    return '<button class="' + (S.bk === x[0] ? 'on' : '') + '" data-act="bk" data-v="' + x[0] + '">' + x[1] + '</button>';
+  }).join('') + '</div>';
+  app.innerHTML = '<div class="wrap"><button class="btn link" data-act="tdash">‹ Paneli</button>' +
+    '<p class="eyebrow">Paneli i mësimdhënësit</p><h1>Banka e kuizeve</h1>' +
+    '<p class="lead">' + B.length + ' kuize të gatshme (' + nQ + ' pyetje) për ' + lendet.length + ' lëndë të klasave 10–12. Merre një kuiz si draft për ta rishikuar dhe përshtatur, ose publikoje menjëherë.</p>' +
+    '<div class="bank-filters"><select id="bank-lenda" aria-label="Lënda"><option value="">Të gjitha lëndët</option>' +
+    lendet.map(function (n) { return '<option' + (n === S.bl ? ' selected' : '') + '>' + esc(n) + '</option>'; }).join('') + '</select>' + segs + '</div>' +
+    (shown.length ? lendet.filter(function (n) { return shown.some(function (b) { return b.lenda === n; }); }).map(function (n) {
+      var l = lenda(n);
+      return '<h2 class="grp" style="--c:' + l.c + '"><span class="ic" aria-hidden="true">' + l.i + '</span>' + esc(n) + '</h2><div class="bank-grid">' +
+        shown.filter(function (b) { return b.lenda === n; }).sort(function (a, b) { return a.klasa - b.klasa; }).map(function (b) {
+          return '<article class="bq" style="--c:' + l.c + '"><div class="bq-top"><span class="badge gray">Klasa ' + b.klasa + '</span>' + (b.marre ? '<span class="badge ok">E ke marrë</span>' : '') + '</div>' +
+            '<h4>' + esc(b.titulli) + '</h4><p class="meta">' + b.nPyetje + ' pyetje · ' + fmtNum(b.maks) + ' pikë · ' + b.kohezgjatja + ' min</p>' +
+            '<div class="actions"><button class="btn sm" data-act="bview" data-v="' + b.i + '">Shiko pyetjet</button><button class="btn sm primary" data-act="btake" data-v="' + b.i + '">Merr si draft</button></div></article>';
+        }).join('') + '</div>';
+    }).join('') : '<div class="empty-state" style="margin-top:16px"><p><b>Asnjë kuiz për këtë zgjedhje.</b></p></div>') +
+    '</div>';
+};
+function showBank(b, i) {
+  var l = lenda(b.lenda);
+  modal('<span class="chip" style="--c:' + l.c + '">' + l.i + ' ' + esc(b.lenda) + '</span> <span class="badge gray">Klasa ' + b.klasa + '</span>' +
+    '<h2 class="mt">' + esc(b.titulli) + '</h2><p class="meta">' + b.pyetjet.length + ' pyetje · ' + b.kohezgjatja + ' min</p>' +
+    (b.udhezimet ? '<div class="instr"><b>Udhëzimet</b><p>' + esc(b.udhezimet) + '</p></div>' : '') +
+    '<div style="margin-top:14px">' + b.pyetjet.map(function (p, k) {
+      var body = p.lloji === 'zgjedhje' ? '<ul>' + p.opsionet.map(function (o, j) { return '<li class="' + (j === p.sakte ? 'ok' : '') + '">' + L[j] + ') ' + esc(o) + (j === p.sakte ? ' ✓' : '') + '</li>'; }).join('') + '</ul>'
+        : p.lloji === 'vf' ? '<ul><li class="ok">' + (p.sakte ? 'E vërtetë ✓' : 'E gabuar ✓') + '</li></ul>'
+        : '<ul><li class="ok">Pranohen: ' + esc(p.sakte) + '</li></ul>';
+      return '<div class="pv-q"><b class="n">' + (k + 1) + '.</b> ' + esc(p.teksti) + ' <span class="pts">· ' + fmtNum(p.piket) + ' pikë</span>' + body + '</div>';
+    }).join('') + '</div>' +
+    '<div class="btn-row" style="justify-content:flex-end;position:sticky;bottom:-22px;background:var(--paper);padding:12px 0 4px;margin-bottom:-4px"><button class="btn" data-act="close">Mbyll</button><button class="btn" data-act="btake" data-v="' + i + '" data-p="1">Publiko menjëherë</button><button class="btn primary" data-act="btake" data-v="' + i + '">Merr si draft</button></div>');
+}
+function newQ(t) {
+  if (t === 'vf') return { lloji: 'vf', teksti: '', sakte: null, piket: 1 };
+  if (t === 'shkurt') return { lloji: 'shkurt', teksti: '', sakte: '', piket: 1 };
+  return { lloji: 'zgjedhje', teksti: '', opsionet: ['', '', '', ''], sakte: null, piket: 1 };
+}
+function qEdit(q, i) {
+  var n = S.draft.pyetjet.length, body;
+  if (q.lloji === 'zgjedhje') {
+    body = '<div class="opts-edit">' + q.opsionet.map(function (o, j) {
+      return '<div class="oe ' + (q.sakte === j ? 'right' : '') + '"><label class="radio" title="Shëno si përgjigje të saktë"><input type="radio" name="s' + i + '" data-act="sakte" data-q="' + i + '" data-o="' + j + '"' + (q.sakte === j ? ' checked' : '') + ' aria-label="Opsioni ' + L[j] + ' është i saktë"><span>' + L[j] + '</span></label>' +
+        '<input data-q="' + i + '" data-o="' + j + '" value="' + esc(o) + '" placeholder="Opsioni ' + L[j] + '">' +
+        (q.opsionet.length > 2 ? '<button class="icon" data-act="delopt" data-q="' + i + '" data-o="' + j + '" aria-label="Fshi opsionin">✕</button>' : '') + '</div>';
+    }).join('') + '</div><div class="oe-foot">' + (q.opsionet.length < 6 ? '<button class="btn sm ghost" data-act="addopt" data-q="' + i + '">+ Shto opsion</button>' : '') +
+      '<span class="hint">Kliko shkronjën për të shënuar përgjigjen e saktë (bëhet e gjelbër).</span></div>';
+  } else if (q.lloji === 'vf') {
+    body = '<div class="seg big"><button class="' + (q.sakte === true ? 'on' : '') + '" data-act="vf" data-q="' + i + '" data-v="true">E vërtetë</button><button class="' + (q.sakte === false ? 'on' : '') + '" data-act="vf" data-q="' + i + '" data-v="false">E gabuar</button></div><span class="hint">Zgjidh cila është përgjigjja e saktë.</span>';
+  } else {
+    body = '<label class="field"><span>Përgjigjet e pranuara</span><input data-q="' + i + '" data-f="sakte" value="' + esc(q.sakte || '') + '" placeholder="p.sh. 46; dyzet e gjashtë"></label><span class="hint">Mund të shkruash disa përgjigje, të ndara me pikëpresje (;). Shkronjat e mëdha/vogla dhe ë/ç nuk merren parasysh.</span>';
+  }
+  var opt = function (v, t) { return '<option value="' + v + '"' + (q.lloji === v ? ' selected' : '') + '>' + t + '</option>'; };
+  return '<div class="qe card"><div class="qe-head"><span class="qnum">' + (i + 1) + '</span><select data-q="' + i + '" data-f="lloji" aria-label="Lloji i pyetjes">' + opt('zgjedhje', 'Zgjedhje e shumëfishtë') + opt('vf', 'E vërtetë / E gabuar') + opt('shkurt', 'Përgjigje e shkurtër') + '</select>' +
+    '<label class="pts">Pikë <input type="number" min="0.5" step="0.5" data-q="' + i + '" data-f="piket" value="' + esc(q.piket) + '"></label>' +
+    '<div class="qe-tools"><button class="icon" data-act="mvq" data-q="' + i + '" data-v="-1"' + (i === 0 ? ' disabled' : '') + ' aria-label="Lëviz lart">↑</button><button class="icon" data-act="mvq" data-q="' + i + '" data-v="1"' + (i === n - 1 ? ' disabled' : '') + ' aria-label="Lëviz poshtë">↓</button>' +
+    '<button class="icon" data-act="dupq" data-q="' + i + '" aria-label="Dyfisho pyetjen">⧉</button><button class="icon danger" data-act="delq" data-q="' + i + '" aria-label="Fshi pyetjen">✕</button></div></div>' +
+    '<textarea rows="2" data-q="' + i + '" data-f="teksti" placeholder="Shkruaj pyetjen…">' + esc(q.teksti) + '</textarea>' + body + '</div>';
+}
+function totalsText() {
+  var d = S.draft, t = d.pyetjet.reduce(function (s, q) { return s + (Number(q.piket) || 1); }, 0);
+  return d.pyetjet.length + ' pyetje · ' + fmtNum(t) + ' pikë';
+}
+VIEWS.tedit = function () {
+  var d = S.draft; if (!d || !S.teacher) { go('tdash'); return; }
+  var lendOpts = LENDET.map(function (l) { return l.n; });
+  if (d.lenda && lendOpts.indexOf(d.lenda) < 0) lendOpts.push(d.lenda);
+  app.innerHTML = '<div class="wrap narrow editor"><button class="btn link" data-act="tback">‹ Paneli</button>' +
+    '<h1>' + (d.id ? 'Ndrysho kuizin' : 'Kuiz i ri') + '</h1>' +
+    (d.id && d.statusi === 'hapur' ? '<p class="note">Ky kuiz është i hapur. Ndryshimet vlejnë për nxënësit që fillojnë tani; dorëzimet e mëparshme nuk rivlerësohen.</p>' : '') +
+    '<div class="card pad form">' +
+    '<label class="field" style="margin-top:0"><span>Titulli</span><input data-bind="titulli" value="' + esc(d.titulli) + '" placeholder="p.sh. Lëvizja drejtvizore — kontroll i shkurtër"></label>' +
+    '<div class="row3"><label class="field"><span>Lënda</span><select data-bind="lenda"><option value="">Zgjidh…</option>' + lendOpts.map(function (n) { return '<option' + (n === d.lenda ? ' selected' : '') + '>' + esc(n) + '</option>'; }).join('') + '</select></label>' +
+    '<label class="field"><span>Klasa</span><select data-bind="klasa">' + [10, 11, 12].map(function (k) { return '<option value="' + k + '"' + (Number(d.klasa) === k ? ' selected' : '') + '>' + k + '</option>'; }).join('') + '</select></label>' +
+    '<label class="field"><span>Koha (minuta)</span><input type="number" min="1" max="240" inputmode="numeric" data-bind="kohezgjatja" value="' + esc(d.kohezgjatja) + '"></label></div>' +
+    '<label class="field"><span>Paralelet <em>(opsionale)</em></span><input data-bind="paralelet" value="' + esc(d.paralelet) + '" placeholder="p.sh. 1, 3 — lëre bosh për të gjitha paralelet"></label>' +
+    '<label class="field"><span>Udhëzimet për nxënësit</span><textarea rows="3" data-bind="udhezimet" placeholder="p.sh. Lexoni me kujdes çdo pyetje. Lejohet makina llogaritëse.">' + esc(d.udhezimet) + '</textarea></label>' +
+    '<label class="check"><input type="checkbox" data-bind="perzierje"' + (d.perzierje ? ' checked' : '') + '><span>Përziej renditjen e pyetjeve për çdo nxënës</span></label>' +
+    '<label class="check"><input type="checkbox" data-bind="shfaqRezultatin"' + (d.shfaqRezultatin ? ' checked' : '') + '><span>Shfaqja nxënësit rezultatin sapo të dorëzojë</span></label></div>' +
+    '<div class="section-head"><h2>Pyetjet</h2><span class="muted" id="totals">' + totalsText() + '</span></div>' +
+    '<div class="qlist">' + d.pyetjet.map(qEdit).join('') + '</div>' +
+    '<div class="addq"><span>Shto pyetje:</span><button class="btn sm" data-act="addq" data-v="zgjedhje">+ Zgjedhje e shumëfishtë</button><button class="btn sm" data-act="addq" data-v="vf">+ E vërtetë / E gabuar</button><button class="btn sm" data-act="addq" data-v="shkurt">+ Përgjigje e shkurtër</button></div></div>' +
+    '<div class="savebar"><div class="wrap narrow">' + (d.statusi === 'hapur' ? '<button class="btn acc" data-act="save" data-v="0">Ruaj ndryshimet</button>'
+      : '<button class="btn" data-act="save" data-v="0">Ruaj si draft</button><button class="btn acc" data-act="save" data-v="1">Ruaj dhe publiko</button>') + '</div></div>';
+};
+
+function subStatus(s, tani) {
+  if (s.statusi === 'dorezuar') return '<span class="badge ok">Dorëzuar</span>';
+  if (s.statusi === 'me_vonese') return '<span class="badge warn">Me vonesë</span>';
+  return tani > s.afati + 90000 ? '<span class="badge bad">Pa dorëzuar</span>' : '<span class="badge info">Në vazhdim</span>';
+}
+function filteredSubs() {
+  return S.res.dorezimet.filter(function (s) { return !S.resPar || String(s.paralelja) === S.resPar; })
+    .sort(function (a, b) { return a.emri.localeCompare(b.emri, 'sq'); });
+}
+VIEWS.tres = function () {
+  var R = S.res;
+  if (!R) { app.innerHTML = '<div class="wrap"><div class="list">' + skeletonCards(1, 90) + skeletonCards(1, 240) + '</div></div>'; loadRes(); return; }
+  var q = R.kuiz, l = lenda(q.lenda);
+  var pars = []; R.dorezimet.forEach(function (s) { var p = String(s.paralelja); if (pars.indexOf(p) < 0) pars.push(p); });
+  pars.sort(function (a, b) { return a.localeCompare(b, 'sq', { numeric: true }); });
+  var rows = filteredSubs();
+  var done = rows.filter(function (s) { return s.statusi !== 'ne_vazhdim'; });
+  var prog = rows.length - done.length;
+  var pc = done.map(function (s) { return s.perqindja || 0; });
+  var avg = function (a) { return a.length ? a.reduce(function (x, y) { return x + y; }, 0) / a.length : null; };
+  var dist = [5, 4, 3, 2, 1].map(function (n) { return done.filter(function (s) { return s.nota === n; }).length; });
+  var maxD = Math.max.apply(null, [1].concat(dist));
+  var withD = done.filter(function (s) { return s.pergjigjet && s.pergjigjet.d; });
+  var tile = function (t, v) { return '<div class="tile"><span>' + t + '</span><b>' + v + '</b></div>'; };
+  app.innerHTML = '<div class="wrap"><button class="btn link" data-act="tdash">‹ Paneli</button>' +
+    '<div class="res-head"><div><span class="chip" style="--c:' + l.c + '">' + l.i + ' ' + esc(q.lenda) + '</span> ' + statusBadge(q.statusi) +
+    '<h1>' + esc(q.titulli) + '</h1><p class="meta">Klasa ' + q.klasa + ' · ' + q.nPyetje + ' pyetje · ' + fmtNum(q.maks) + ' pikë · ' + q.kohezgjatja + ' min · Kodi ' + fmtCode(q.kodi) + '</p></div>' +
+    '<div class="actions"><button class="btn sm" data-act="resref">↻ Rifresko</button><button class="btn sm ' + (S.live ? 'on' : '') + '" data-act="live" title="Rifreskim automatik çdo 15 sekonda">' + (S.live ? '● Drejtpërdrejt' : '○ Drejtpërdrejt') + '</button>' +
+    '<button class="btn sm" data-act="copy">Kopjo tabelën</button>' + (R.url ? '<a class="btn sm" href="' + esc(R.url) + '" target="_blank" rel="noopener">Hap në Google Sheets</a>' : '') + '</div></div>' +
+    (pars.length > 1 ? '<div class="section-head" style="margin:18px 0 0"><div class="seg">' + [''].concat(pars).map(function (p) {
+      return '<button class="' + (S.resPar === p ? 'on' : '') + '" data-act="rpar" data-v="' + esc(p) + '">' + (p ? q.klasa + '/' + esc(p) : 'Të gjitha paralelet') + '</button>';
+    }).join('') + '</div></div>' : '') +
+    '<div class="tiles">' + tile('Dorëzime', done.length) + tile('Në vazhdim / pa dorëzuar', prog) + tile('Mesatarja', pc.length ? fmtNum(avg(pc)) + '%' : '–') +
+    tile('Nota mesatare', done.length ? fmtNum(avg(done.map(function (s) { return s.nota || 1; }))) : '–') +
+    tile('Më e larta', pc.length ? fmtNum(Math.max.apply(null, pc)) + '%' : '–') + tile('Më e ulëta', pc.length ? fmtNum(Math.min.apply(null, pc)) + '%' : '–') + '</div>' +
+    '<div class="two-col"><div class="card pad"><h3>Shpërndarja e notave</h3><div class="bars">' + [5, 4, 3, 2, 1].map(function (n, k) {
+      return '<div class="bar-row"><span class="bl">Nota ' + n + '</span><div class="bt"><i style="width:' + (dist[k] / maxD * 100) + '%"></i></div><b>' + dist[k] + '</b></div>';
+    }).join('') + '</div></div>' +
+    '<div class="card pad"><h3>Saktësia sipas pyetjeve</h3>' + (withD.length ? '<div class="bars">' + q.pyetjet.map(function (p, i) {
+      var ok = withD.filter(function (s) { return s.pergjigjet.d[i]; }).length, pct = Math.round(ok / withD.length * 100);
+      return '<div class="bar-row" title="' + esc(p.teksti) + '"><span class="bl">Pyetja ' + (i + 1) + '</span><div class="bt"><i class="' + (pct >= 75 ? 'g' : pct >= 50 ? 'a' : 'r') + '" style="width:' + pct + '%"></i></div><b>' + pct + '%</b></div>';
+    }).join('') + '</div><p class="hint">Pyetjet me të kuqe (nën 50%) mund të kenë nevojë për përsëritje në klasë.</p>' : '<p class="muted mt">Shfaqet pasi të dorëzojnë nxënësit.</p>') + '</div></div>' +
+    '<div class="card table-card">' + (rows.length ? '<table><thead><tr><th>Nxënësi</th><th>Klasa</th><th>Pikët</th><th>%</th><th>Nota</th><th>Koha</th><th>Largime</th><th>Statusi</th></tr></thead><tbody>' + rows.map(function (s) {
+      var d = s.statusi !== 'ne_vazhdim';
+      return '<tr data-act="sub" data-v="' + s.id + '"><td class="nm">' + esc(s.emri) + '</td><td>' + s.klasa + '/' + esc(s.paralelja) + '</td><td>' + (d ? fmtNum(s.piket) + ' / ' + fmtNum(s.maks) : '–') + '</td><td>' + (d ? fmtNum(s.perqindja) + '%' : '–') + '</td>' +
+        '<td>' + (d ? '<span class="nota n' + s.nota + '">' + s.nota + '</span>' : '–') + '</td><td>' + (d ? Math.max(1, Math.round((s.dorezimi - s.fillimi) / 60000)) + ' min' : 'nga ' + fmtTime(s.fillimi)) + '</td>' +
+        '<td' + (s.largime ? ' class="lg-warn"' : '') + '>' + s.largime + '</td><td>' + subStatus(s, R.tani) + '</td></tr>';
+    }).join('') + '</tbody></table>' : '<div class="empty-state" style="border:0"><p><b>Ende asnjë nxënës.</b></p><p class="muted">' + (q.statusi === 'hapur' ? 'Jepu nxënësve kodin <b>' + fmtCode(q.kodi) + '</b>. Ndize “Drejtpërdrejt” për t\'i parë ndërsa hyjnë.' : 'Publikoje kuizin që nxënësit të mund të hyjnë.') + '</p></div>') + '</div>' +
+    '</div>';
+};
+
+function fmtAns(p, v) {
+  if (v === undefined || v === null || String(v).trim() === '') return '<em class="muted">pa përgjigje</em>';
+  if (p.lloji === 'zgjedhje') return L[v] + ') ' + esc(p.opsionet[v]);
+  if (p.lloji === 'vf') return v === true || v === 'true' ? 'E vërtetë' : 'E gabuar';
+  return esc(v);
+}
+function showSub(id) {
+  var s = null; S.res.dorezimet.forEach(function (x) { if (x.id === id) s = x; });
+  if (!s) { closeModal(); return; }
+  S.modalSub = id;
+  var q = S.res.kuiz, pg = s.pergjigjet;
+  var html = '<div class="sub-head"><div><h3>' + esc(s.emri) + '</h3><p class="muted small">Klasa ' + s.klasa + '/' + esc(s.paralelja) + '</p></div>' +
+    (pg ? '<span class="nota n' + s.nota + '" style="width:44px;height:44px;font-size:20px">' + s.nota + '</span>' : '') + '</div>' +
+    '<div class="sub-facts"><span>Filloi: <b>' + fmtTime(s.fillimi) + '</b></span><span>Dorëzoi: <b>' + fmtTime(s.dorezimi) + '</b></span>' +
+    (pg ? '<span>Pikët: <b>' + fmtNum(s.piket) + ' / ' + fmtNum(s.maks) + ' (' + fmtNum(s.perqindja) + '%)</b></span>' : '') +
+    '<span>Largime nga faqja: <b' + (s.largime ? ' class="lg-warn"' : '') + '>' + s.largime + '</b></span></div>';
+  if (!pg) html += '<p class="note">Nxënësi e ka filluar kuizin, por ende nuk e ka dorëzuar.</p>';
+  else html += q.pyetjet.map(function (p, i) {
+    var ok = !!pg.d[i];
+    var right = p.lloji === 'zgjedhje' ? L[p.sakte] + ') ' + esc(p.opsionet[p.sakte]) : p.lloji === 'vf' ? (p.sakte ? 'E vërtetë' : 'E gabuar') : esc(p.sakte);
+    return '<div class="ans-row ' + (ok ? '' : 'bad') + '"><div class="ar-h">' + (i + 1) + '. ' + esc(p.teksti) + '</div><div class="ar-b"><span>Përgjigjja: <b>' + fmtAns(p, pg.a[i]) + '</b> ' + (ok ? '✓' : '✗') + '</span><span>E saktë: ' + right + '</span></div>' +
+      '<button class="btn sm" data-act="ovr" data-v="' + s.id + '" data-i="' + i + '" data-ok="' + (ok ? 0 : 1) + '">' + (ok ? 'Shëno si gabim' : 'Shëno si të saktë') + '</button></div>';
+  }).join('');
+  html += '<div class="btn-row" style="justify-content:space-between"><button class="btn danger" data-act="delsub" data-v="' + s.id + '">Fshi (lejo ta rifillojë)</button><button class="btn primary" data-act="close">Mbyll</button></div>';
+  modal(html);
+}
+function showProj(q) {
+  var link = LINKU_I_SHKURTER || (API_URL ? (location.host + location.pathname).replace(/index\.html$/, '').replace(/\/$/, '') : '') || (S.teacher && S.teacher.url ? S.teacher.url.replace(/^https?:\/\//, '') : 'faqen e kuizeve');
+  modal('<div class="proj"><p class="eyebrow">' + esc(q.lenda) + ' · Klasa ' + q.klasa + (q.paralelet ? ' (' + esc(q.paralelet) + ')' : '') + '</p><h1>' + esc(q.titulli) + '</h1>' +
+    '<ol><li><i>1</i><span>Hap: <span class="url">' + esc(link) + '</span></span></li>' +
+    '<li><i>2</i><span>Shtyp <b>“Jam nxënës · Hyr me kod”</b> dhe shkruaj kodin:</span></li>' +
+    '<li style="padding-left:58px"><span class="bigcode">' + fmtCode(q.kodi) + '</span></li>' +
+    '<li><i>3</i><span>Shkruaj emrin, mbiemrin, klasën dhe paralelen, pastaj <b>“Fillo kuizin”</b>.</span></li></ol>' +
+    '<div class="foot"><span>Koha: <b>' + q.kohezgjatja + ' minuta</b> · ' + q.nPyetje + ' pyetje</span><button class="btn lg" data-act="close">Mbyll</button></div></div>', 'full');
+}
+
+// ================= ACTIONS =================
+var ACTIONS = {
+  home: function () { go('home'); },
+  back: function () { go(S.lenda && S.joinFor ? 'subject' : 'home'); },
+  join: function (el) { go('join', { joinFor: el.dataset.v || null }); },
+  subject: function (el) { go('subject', { lenda: el.dataset.v }); },
+  fk: function (el) { S.fk = Number(el.dataset.v); render(); },
+  tlogin: function () { go(S.teacher ? 'tdash' : 'tlogin'); },
+  tdash: function () { S.tq = null; go('tdash'); },
+  logout: function () { S.teacher = null; sess.del(KEY_T); S.tq = null; S.bank = null; go('home'); toast('Dole nga paneli.'); },
+  close: function () { closeModal(); },
+  cfok: function () { var f = S._cf; S._cf = null; closeModal(); if (f) f(true); },
+  resume: function (el) {
+    var a = store.get(KEY_ATT, null); if (!a) return;
+    busy(el, true);
+    api('fillo', { kodi: a.kodi, emri: a.emri, klasa: a.klasa, paralelja: a.paralelja }).then(function (d) { startTake(d, a); })
+      .catch(function (e) { store.del(KEY_ATT); toast(e.message, 'err', 5000); render(); });
+  },
+  // take
+  ans: function (el) {
+    var a = S.att, q = a.pyetjet[a.idx];
+    a.answers[q.i] = q.lloji === 'vf' ? el.dataset.v === 'true' : Number(el.dataset.v);
+    saveAtt(); render();
+  },
+  prev: function () { var a = S.att; if (a.idx > 0) { a.idx--; saveAtt(); render(); } },
+  next: function () { var a = S.att; if (a.idx < a.pyetjet.length - 1) { a.idx++; saveAtt(); render(); } },
+  "goto": function (el) { var a = S.att; a.idx = Number(el.dataset.v); a.review = false; saveAtt(); render(); },
+  review: function () { S.att.review = true; render(); window.scrollTo(0, 0); },
+  submit: function () {
+    var a = S.att, left = a.pyetjet.length - countAnswered(a);
+    if (left > 0) confirmBox('Dorëzo me pyetje pa përgjigje?', left + (left === 1 ? ' pyetje është' : ' pyetje janë') + ' pa përgjigje. Pas dorëzimit nuk mund të ndryshosh asgjë.', 'Po, dorëzo', false)
+      .then(function (ok) { if (ok) submitAttempt(false); });
+    else submitAttempt(false);
+  },
+  // teacher
+  tf: function (el) { S.tf = el.dataset.v; render(); },
+  tbank: function () { S.bank = null; go('tbank'); },
+  bk: function (el) { S.bk = Number(el.dataset.v); render(); },
+  bview: function (el) {
+    var i = Number(el.dataset.v); busy(el, true);
+    tapi('shikoBanken', { i: i }).then(function (b) { busy(el, false); showBank(b, i); }).catch(function (e) { busy(el, false); toast(e.message, 'err'); });
+  },
+  btake: function (el) {
+    var i = Number(el.dataset.v), pub = el.dataset.p === '1'; busy(el, true);
+    tapi('ngaBanka', { i: i, publiko: pub }).then(function (q) {
+      (S.bank || []).forEach(function (b) { if (b.i === i) b.marre = true; });
+      closeModal(); S.tq = null; S.lista = null;
+      if (pub) { toast('Kuizi u publikua. Kodi: ' + fmtCode(q.kodi), 'ok', 6000); render(); }
+      else { S.draft = q; S.dirty = false; toast('U shtua te kuizet e tua si draft. Rishikoje dhe publikoje.', 'ok', 5000); go('tedit'); }
+    }).catch(function (e) { busy(el, false); toast(e.message, 'err'); });
+  },
+  tnew: function () {
+    S.draft = { titulli: '', lenda: '', klasa: 10, kohezgjatja: 20, paralelet: '', udhezimet: '', perzierje: true, shfaqRezultatin: true, pyetjet: [newQ('zgjedhje')] };
+    S.dirty = false; go('tedit');
+  },
+  tedit: function (el) {
+    busy(el, true);
+    tapi('merrKuizin', { id: el.dataset.v }).then(function (q) { S.draft = q; S.dirty = false; go('tedit'); })
+      .catch(function (e) { busy(el, false); toast(e.message, 'err'); });
+  },
+  tback: function () {
+    if (!S.dirty) { S.tq = null; go('tdash'); return; }
+    confirmBox('Dil pa ruajtur?', 'Ke ndryshime që nuk janë ruajtur.', 'Dil pa ruajtur', true).then(function (ok) { if (ok) { S.dirty = false; S.tq = null; go('tdash'); } });
+  },
+  status: function (el) {
+    var s = el.dataset.s, id = el.dataset.v;
+    var run = function () {
+      busy(el, true);
+      tapi('ndryshoStatusin', { id: id, statusi: s }).then(function (q) {
+        toast(s === 'hapur' ? 'Kuizi u publikua. Kodi: ' + fmtCode(q.kodi) : 'Kuizi u mbyll.', 'ok', 4500); S.lista = null; loadTq();
+      }).catch(function (e) { busy(el, false); toast(e.message, 'err'); });
+    };
+    if (s === 'mbyllur') confirmBox('Mbyll kuizin?', 'Nxënësit nuk mund ta fillojnë më. Ata që e kanë filluar, mund ta dorëzojnë.', 'Mbyll kuizin', false).then(function (ok) { if (ok) run(); });
+    else run();
+  },
+  dup: function (el) {
+    busy(el, true);
+    tapi('dyfisho', { id: el.dataset.v }).then(function () { toast('U krijua një kopje si draft.', 'ok'); S.tf = 'all'; loadTq(); })
+      .catch(function (e) { busy(el, false); toast(e.message, 'err'); });
+  },
+  del: function (el) {
+    var q = null; (S.tq || []).forEach(function (x) { if (x.id === el.dataset.v) q = x; });
+    var n = q ? q.dorezuar + q.neVazhdim : 0;
+    confirmBox('Fshi kuizin?', '“' + (q ? q.titulli : '') + '” do të fshihet përgjithmonë' + (n ? ', bashkë me ' + n + ' dorëzime.' : '.'), 'Fshi', true).then(function (ok) {
+      if (!ok) return;
+      tapi('fshiKuizin', { id: el.dataset.v }).then(function () { toast('Kuizi u fshi.'); loadTq(); }).catch(function (e) { toast(e.message, 'err'); });
+    });
+  },
+  proj: function (el) { (S.tq || []).forEach(function (q) { if (q.id === el.dataset.v) showProj(q); }); },
+  tres: function (el) { S.res = null; S.resId = el.dataset.v; S.resPar = ''; go('tres'); },
+  // editor
+  addq: function (el) {
+    S.draft.pyetjet.push(newQ(el.dataset.v)); S.dirty = true; render();
+    var cards = document.querySelectorAll('.qe'); var last = cards[cards.length - 1];
+    if (last) { last.scrollIntoView({ behavior: 'smooth', block: 'center' }); var t = last.querySelector('textarea'); if (t) setTimeout(function () { t.focus({ preventScroll: true }); }, 250); }
+  },
+  delq: function (el) {
+    var i = Number(el.dataset.q), p = S.draft.pyetjet;
+    var doit = function () { p.splice(i, 1); S.dirty = true; render(); };
+    if (p[i].teksti) confirmBox('Fshi pyetjen ' + (i + 1) + '?', p[i].teksti.slice(0, 120), 'Fshi', true).then(function (ok) { if (ok) doit(); }); else doit();
+  },
+  mvq: function (el) {
+    var i = Number(el.dataset.q), j = i + Number(el.dataset.v), p = S.draft.pyetjet;
+    if (j < 0 || j >= p.length) return; var t = p[i]; p[i] = p[j]; p[j] = t; S.dirty = true; render();
+  },
+  dupq: function (el) { var i = Number(el.dataset.q); S.draft.pyetjet.splice(i + 1, 0, clone(S.draft.pyetjet[i])); S.dirty = true; render(); },
+  addopt: function (el) { var q = S.draft.pyetjet[Number(el.dataset.q)]; if (q.opsionet.length < 6) q.opsionet.push(''); S.dirty = true; render(); },
+  delopt: function (el) {
+    var q = S.draft.pyetjet[Number(el.dataset.q)], j = Number(el.dataset.o);
+    q.opsionet.splice(j, 1);
+    if (q.sakte === j) q.sakte = null; else if (q.sakte > j) q.sakte--;
+    S.dirty = true; render();
+  },
+  sakte: function (el) { S.draft.pyetjet[Number(el.dataset.q)].sakte = Number(el.dataset.o); S.dirty = true; render(); },
+  vf: function (el) { S.draft.pyetjet[Number(el.dataset.q)].sakte = el.dataset.v === 'true'; S.dirty = true; render(); },
+  save: function (el) {
+    var publiko = el.dataset.v === '1', k = clone(S.draft);
+    // hiq opsionet bosh dhe rregullo indeksin e përgjigjes së saktë
+    k.pyetjet.forEach(function (q) {
+      if (q.lloji !== 'zgjedhje') return;
+      var map = {}, op = [];
+      q.opsionet.forEach(function (o, j) { if (String(o).trim()) { map[j] = op.length; op.push(o); } });
+      q.sakte = q.sakte !== null && map[q.sakte] !== undefined ? map[q.sakte] : null;
+      q.opsionet = op;
+    });
+    var btns = document.querySelectorAll('[data-act=save]'); Array.prototype.forEach.call(btns, function (b) { b.disabled = true; }); busy(el, true);
+    tapi('ruajKuizin', { kuiz: k, publiko: publiko }).then(function (q) {
+      S.dirty = false; S.lista = null;
+      toast(q.statusi === 'hapur' ? 'U ruajt dhe është publik. Kodi: ' + fmtCode(q.kodi) : 'U ruajt si draft.', 'ok', 4500);
+      S.tq = null; go('tdash');
+    }).catch(function (e) {
+      Array.prototype.forEach.call(btns, function (b) { b.disabled = false; }); busy(el, false);
+      toast(e.message, 'err', 5000);
+    });
+  },
+  // results
+  resref: function (el) { busy(el, true); loadRes().then(function () { busy(el, false); toast('U rifreskua.'); }); },
+  live: function () {
+    S.live = !S.live; clearInterval(S.liveT);
+    if (S.live) S.liveT = setInterval(function () { if (S.view === 'tres') loadRes(true); }, 15000);
+    render();
+  },
+  rpar: function (el) { S.resPar = el.dataset.v; render(); },
+  sub: function (el) { showSub(el.dataset.v); },
+  ovr: function (el) {
+    busy(el, true);
+    tapi('ndryshoVleresimin', { id: el.dataset.v, i: Number(el.dataset.i), ok: el.dataset.ok === '1' }).then(function (s) {
+      S.res.dorezimet = S.res.dorezimet.map(function (x) { return x.id === s.id ? s : x; });
+      render(); showSub(s.id);
+    }).catch(function (e) { busy(el, false); toast(e.message, 'err'); });
+  },
+  delsub: function (el) {
+    var id = el.dataset.v; S._cf = null;
+    confirmBox('Fshi këtë dorëzim?', 'Nxënësi do të mund ta fillojë kuizin nga e para (nëse kuizi është ende i hapur).', 'Fshi', true).then(function (ok) {
+      if (!ok) return;
+      tapi('fshiDorezimin', { id: id }).then(function () { toast('Dorëzimi u fshi.'); loadRes(); }).catch(function (e) { toast(e.message, 'err'); });
+    });
+  },
+  copy: function () {
+    var q = S.res.kuiz;
+    var lines = [['Emri', 'Klasa', 'Paralelja', 'Pikët', 'Maks', 'Përqindja', 'Nota', 'Statusi', 'Largime'].join('\t')].concat(filteredSubs().map(function (s) {
+      var d = s.statusi !== 'ne_vazhdim';
+      return [s.emri, s.klasa, s.paralelja, d ? fmtNum(s.piket) : '', d ? fmtNum(s.maks) : '', d ? fmtNum(s.perqindja) : '', d ? s.nota : '', d ? (s.statusi === 'me_vonese' ? 'Me vonesë' : 'Dorëzuar') : 'Pa dorëzuar', s.largime].join('\t');
+    }));
+    var txt = lines.join('\n');
+    var fallback = function () {
+      modal('<h3>Kopjo rezultatet</h3><p class="muted small" style="margin:6px 0 10px">Zgjidh tekstin dhe kopjoje; ngjitet drejt në Excel ose Google Sheets.</p><textarea class="copy-area" readonly>' + esc(txt) + '</textarea><div class="btn-row end"><button class="btn primary" data-act="close">Mbyll</button></div>');
+      var t = document.querySelector('.copy-area'); if (t) { t.focus(); t.select(); }
+    };
+    try { navigator.clipboard.writeText(txt).then(function () { toast('Tabela u kopjua — ngjite në Excel ose Sheets.', 'ok'); }, fallback); } catch (e) { fallback(); }
+    void q;
+  }
+};
+
+// ================= FORMS =================
+var FORMS = {
+  code: function (f) {
+    var c = $('#code').value.replace(/\D/g, '');
+    if (c.length !== 6) { toast('Kodi duhet të ketë 6 shifra.', 'err'); return; }
+    var b = f.querySelector('[type=submit]'); busy(b, true);
+    api('gjejKuizin', { kodi: c }).then(function (q) { go('intro', { quiz: q, kodi: c }); }).catch(function (e) { busy(b, false); toast(e.message, 'err', 5000); });
+  },
+  start: function (f) {
+    var emri = f.emri.value.replace(/\s+/g, ' ').trim(), klasa = Number(f.klasa.value), par = f.paralelja.value.trim();
+    if (emri.split(' ').length < 2) { toast('Shkruaj emrin dhe mbiemrin.', 'err'); f.emri.focus(); return; }
+    if (!par) { toast('Shkruaj paralelen.', 'err'); f.paralelja.focus(); return; }
+    store.set(KEY_ME, { emri: emri, paralelja: par });
+    var b = f.querySelector('[type=submit]'); busy(b, true);
+    var who = { kodi: S.kodi, emri: emri, klasa: klasa, paralelja: par };
+    api('fillo', who).then(function (d) { startTake(d, who); }).catch(function (e) { busy(b, false); toast(e.message, 'err', 6000); });
+  },
+  login: function (f) {
+    var pin = f.pin.value.trim(); if (!pin) { toast('Shkruaj PIN-in.', 'err'); return; }
+    var b = f.querySelector('[type=submit]'); busy(b, true);
+    api('hyr', { pin: pin }).then(function (d) {
+      S.teacher = { pin: pin, emri: d.emri, url: d.url }; sess.set(KEY_T, S.teacher); S.tq = null; go('tdash');
+    }).catch(function (e) { busy(b, false); toast(e.message, 'err'); f.pin.select(); });
+  }
+};
+
+// ================= EVENTS =================
+document.addEventListener('click', function (e) {
+  if (e.target.id === 'modal') { closeModal(); return; }
+  var el = e.target.closest('[data-act]'); if (!el || el.disabled) return;
+  var fn = ACTIONS[el.dataset.act]; if (!fn) return;
+  if (el.type !== 'radio' && el.type !== 'checkbox') e.preventDefault();
+  fn(el, e);
+});
+document.addEventListener('submit', function (e) {
+  var f = e.target; e.preventDefault();
+  if (f.dataset.form && FORMS[f.dataset.form]) FORMS[f.dataset.form](f);
+});
+function onField(e) {
+  var t = e.target, isToggle = t.tagName === 'SELECT' || t.type === 'checkbox';
+  if ((e.type === 'input') === isToggle) return;
+  if (t.id === 'code') { var v = t.value.replace(/\D/g, '').slice(0, 6); if (v !== t.value) t.value = v; return; }
+  if (S.view === 'take' && t.id === 'short-ans' && S.att) {
+    var q = S.att.pyetjet[S.att.idx]; S.att.answers[q.i] = t.value; saveAtt(); refreshProgress(); return;
+  }
+  if (t.id === 'bank-lenda') { S.bl = t.value; render(); return; }
+  if (S.view !== 'tedit' || !S.draft) return;
+  var d = S.draft;
+  if (t.dataset.bind) { d[t.dataset.bind] = t.type === 'checkbox' ? t.checked : t.value; S.dirty = true; return; }
+  if (t.dataset.q == null) return;
+  var q2 = d.pyetjet[Number(t.dataset.q)]; if (!q2) return;
+  if (t.dataset.o != null && t.type !== 'radio') { q2.opsionet[Number(t.dataset.o)] = t.value; S.dirty = true; return; }
+  var f = t.dataset.f; if (!f) return;
+  if (f === 'lloji') {
+    var nq = newQ(t.value); nq.teksti = q2.teksti; nq.piket = q2.piket;
+    if (t.value === 'zgjedhje' && q2.opsionet) { nq.opsionet = q2.opsionet; nq.sakte = q2.sakte; }
+    d.pyetjet[Number(t.dataset.q)] = nq; S.dirty = true; render(); return;
+  }
+  q2[f] = t.value; S.dirty = true;
+  if (f === 'piket') { var tt = $('#totals'); if (tt) tt.textContent = totalsText(); }
+}
+document.addEventListener('input', onField);
+document.addEventListener('change', onField);
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('#modal').hidden) closeModal(); });
+document.addEventListener('visibilitychange', function () {
+  if (S.view !== 'take' || !S.att) return;
+  if (document.hidden) { S.att.largime++; saveAtt(); }
+  else { toast('Kujdes: largimi nga faqja u regjistrua (' + S.att.largime + ').', 'warn', 4000); var el = $('#timer'); if (el && S.att.deadline - Date.now() <= 0) submitAttempt(true); }
+});
+window.addEventListener('beforeunload', function (e) { if (S.view === 'take' || (S.view === 'tedit' && S.dirty)) { e.preventDefault(); e.returnValue = ''; } });
+
+// ================= START =================
+if (!HAS_GAS && !API_URL && !LOKAL) {
+  var sb = document.createElement('div');
+  sb.style.cssText = 'background:#b3261e;color:#fff;padding:10px 18px;text-align:center;font-size:14.5px';
+  sb.textContent = 'Faqja nuk është lidhur ende me Google Sheets. Ngjit linkun e Apps Script (…/exec) te API_URL në index.html.';
+  document.body.insertBefore(sb, document.body.firstChild);
+}
+render();
+})();
+</script>
+</body>
+</html>
